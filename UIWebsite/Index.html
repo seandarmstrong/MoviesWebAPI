@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GC Movie DB</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="site.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+</head>
+
+<body>
+    <h1>The GC Movie Database</h1>
+    <p>Your source for 10 of the best movies of all time!</p>
+    <div class="row">
+        <div class="col-md-2">
+            <Label for="category">Enter Movie Category:</Label>
+        </div>
+        <div class="col-md-2">
+            <input type="text" class="form-control" id="movieCategory">
+        </div>
+    </div>
+    <button type="button" class="btn-primary btn-md" id="submit" onclick="loadCategoryData();">Search</button>
+    <button type="button" class="btn-primary btn-md" id="submit" onclick="toggleTable(); loadData();">All Movies</button>
+    <div id="tableToggle">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Rating</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody id="movies"></tbody>
+        </table>
+    </div>
+    <div>
+        <table class="table" id="tableClear">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Rating</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody id="tableCategory"></tbody>
+        </table>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
