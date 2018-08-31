@@ -1,4 +1,7 @@
 function loadData() {
+  $("#tableClear")
+    .find("tbody")
+    .empty();
   fetch("http://localhost:60770/api/Movies")
     .then(response => response.json())
     .then(request => {
@@ -21,15 +24,16 @@ function loadCategoryData() {
   $("#tableClear")
     .find("tbody")
     .empty();
-  fetch("http://localhost:60770/api/Movies")
+  fetch(
+    `http://localhost:60770/api/Movies?Category=${
+      document.getElementById("movieCategory").value
+    }`
+  )
     .then(response => response.json())
     .then(data => {
       let test = "";
       for (let i = 0; i < data.length; i++) {
-        if (
-          data[i].Category === document.getElementById("movieCategory").value
-        ) {
-          let test = `
+        let test = `
             <tr>
             <td>${data[i].Category}</td>
             <td>${data[i].Title}</td>
@@ -37,10 +41,39 @@ function loadCategoryData() {
             <td>${data[i].Description}</td>
             </tr>
             `;
-          $(test).appendTo("#tableCategory");
-        }
+        $(test).appendTo("#tableCategory");
       }
     });
+}
+
+function loadRandomMovieData() {
+  $("#tableClear")
+    .find("tbody")
+    .empty();
+  let random = getRandomIntInclusive(1, 10);
+  fetch(`http://localhost:60770/api/Movies/${random}`)
+    .then(response => response.json())
+    .then(request => {
+      let test = "";
+      let movieArray = [
+        request.Category,
+        request.Title,
+        request.Rating,
+        request.Description
+      ];
+      movieArray.forEach(item => {
+        test += `
+      <td>${item}</td>
+      `;
+        document.querySelector("#random").innerHTML = test;
+      });
+    });
+}
+
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function toggleTable() {

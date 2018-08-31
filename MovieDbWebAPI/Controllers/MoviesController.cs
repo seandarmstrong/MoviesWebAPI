@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
+using MovieDbWebAPI.DAL;
+using MovieDbWebAPI.Models;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -8,8 +8,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using MovieDbWebAPI.DAL;
-using MovieDbWebAPI.Models;
 
 namespace MovieDbWebAPI.Controllers
 {
@@ -21,6 +19,18 @@ namespace MovieDbWebAPI.Controllers
         public IQueryable<Movie> GetMovies()
         {
             return db.Movies;
+        }
+
+        public IQueryable<Movie> GetMovies(string Category)
+        {
+            var category = Request.GetQueryNameValuePairs().Where(nv => nv.Key == "Category").Select(nv => nv.Value)
+                .FirstOrDefault();
+            var moviesByCategory = db.Movies.Where(m => m.Category == category);
+            if (moviesByCategory == null)
+            {
+                throw new HttpRequestException("Category does not exist");
+            }
+            return moviesByCategory;
         }
 
         // GET: api/Movies/5

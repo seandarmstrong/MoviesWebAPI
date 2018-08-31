@@ -9,43 +9,69 @@
 </head>
 
 <body>
-    <h1>The GC Movie Database</h1>
-    <p>Your source for 10 of the best movies of all time!</p>
-    <div class="row">
-        <div class="col-md-2">
-            <Label for="category">Enter Movie Category:</Label>
-        </div>
-        <div class="col-md-2">
-            <input type="text" class="form-control" id="movieCategory">
+    <div class="top">
+        <h1>The GC Movie Database</h1>
+        <p>Your source for 10 of the best movies of all time!</p>
+    </div>
+    <div class="firstTable">
+        <button type="button" class="btn-primary btn-md" id="submit" onclick="toggleTable(); loadData();">All Movies</button>
+        <div id="tableToggle">
+            <table class="table" id="tableClear">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Rating</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody id="movies"></tbody>
+            </table>
         </div>
     </div>
-    <button type="button" class="btn-primary btn-md" id="submit" onclick="loadCategoryData();">Search</button>
-    <button type="button" class="btn-primary btn-md" id="submit" onclick="toggleTable(); loadData();">All Movies</button>
-    <div id="tableToggle">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Category</th>
-                    <th>Title</th>
-                    <th>Rating</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody id="movies"></tbody>
-        </table>
+    <div class="secondTable">
+        <div class="row">
+            <div class="col-md-2">
+                <Label for="category">Enter Movie Category:</Label>
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" id="movieCategory">
+            </div>
+        </div>
+        <span class="search"><button type="button" class="btn-primary btn-md" id="submit" onclick="loadCategoryData();">Search
+                Category
+            </button></span>
+        <div>
+            <table class="table" id="tableClear">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Rating</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody id="tableCategory"></tbody>
+            </table>
+        </div>
     </div>
-    <div>
-        <table class="table" id="tableClear">
-            <thead>
-                <tr>
-                    <th>Category</th>
-                    <th>Title</th>
-                    <th>Rating</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody id="tableCategory"></tbody>
-        </table>
+    <div class="thirdTable">
+        <button type="button" class="btn-primary btn-md" id="submit" onclick="loadRandomMovieData();">Random Movie</button>
+        <div>
+            <table class="table" id="tableClear">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Rating</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="random"></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <script src="app.js"></script>
 </body>
